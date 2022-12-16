@@ -6,10 +6,10 @@ import UserContext from '../../utils/UserContext';
 export default function NavBar() {
     //State Management
 
-    const user = useContext(UserContext);
-
+    
+    const user = firebase.auth().currentUser;
     useEffect(() => {
-        console.log( user)
+        console.log( user )
     }, [])
      
 
@@ -37,7 +37,7 @@ export default function NavBar() {
                     <Link to="/create">Create a Garden</Link>
                 </li>
                 <li>
-                   {!user? (<Link to="/login">Sign in</Link>):( <button onClick={handleSignOut}>Sign Out</button>)}
+                   {user? (<Link to="/login">Sign in</Link>):( <button onClick={handleSignOut}>Sign Out</button>)}
                 </li>
             </ul>
         </nav>

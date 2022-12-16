@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../utils/UserContext'
 import firebase from '../utils/firebase'
@@ -8,6 +8,14 @@ import LinkList from '../components/create/linkList';
 
 
 function Create() {
+    useEffect(() => {
+        if (uid) {
+         console.log('User Logged in')
+        } else {
+            alert('Please log in')
+     } 
+    }, [])
+
     const [title, setTitle] = useState();
     const [url, setUrl] = useState();
     
