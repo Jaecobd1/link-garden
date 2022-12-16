@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState, useEffect, useRef} from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../utils/UserContext'
 import firebase from '../utils/firebase'
@@ -7,6 +7,8 @@ import LinkList from '../components/create/linkList';
 
 
 function Create() {
+    const { user } = useContext(UserContext)
+    const uid = user.uid
     useEffect(() => {
         if (uid) {
          console.log('User Logged in')
@@ -20,10 +22,11 @@ function Create() {
     
 
 
-    const { user } = useContext(UserContext)
-    const uid = user.uid
+    
     const linkRef = firebase.database().ref(uid);
 
+
+    
     
 
     const createLink = () => {
@@ -41,10 +44,12 @@ function Create() {
     const gardenLink = "/garden/" + uid;
     return (
         <>
-            <div className="min-h-screen h-full bg-slate-500 flex flex-col items-center">
+            <div className="min-h-screen h-full bg-grey flex flex-col items-center">
              <div className="flex justify-between items-center h-[200px] px-5 w-screen">
             
-            <h1 className="text-2xl font-bold capitalize underline text-white">{user.displayName}'s Garden</h1>
+            {user ? (<h1 className="text-2xl font-bold  underline text-blue">{user.displayName}'s Garden</h1>) : (
+                <h1>Please Login</h1>
+            )}
                     <Link to="/profile">Edit profile</Link>
                     <Link to={gardenLink}>View Garden</Link>
 
@@ -52,9 +57,9 @@ function Create() {
 
 
                 </div>
-                <div className="border-blue border-2 rounded-xl p-4 m-2 flex flex-col md:flex-row">
+                <div className="border-blue border-2 rounded-xl p-4 m-2 flex flex-col md:flex-row bg-white">
                     <input type="url" onChange={((e) => { setUrl(e.target.value) })} placeholder="URL" />
-                    <input type="text" onChange={((e) => { setTitle(e.target.value) })} placeholder="Title" />
+                    <input type="text" onChange={((e) => { setTitle(e.target.value) })} placeholder="Title" className="bg-grey placeholder:text-slate-500 text-black" />
                     <button onClick={createLink}>Submit</button>
                     
                 </div>
