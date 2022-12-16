@@ -8,9 +8,25 @@ import ForgotPassword from './pages/forgotPassword'
 import firebase from './utils/firebase'
 import Account from './pages/account'
 import UserProvider from './utils/UserContext'
+import Garden from './pages/garden'
+import {useEffect, useState} from 'react'
 
 
 function App() {
+  const [usersList, setUserList] = useState([])
+
+  useEffect(() => {
+        const dbRef = firebase.database().refFromURL('https://link-garden-default-rtdb.firebaseio.com/')
+    dbRef.on('value', (snapshot => {
+          const _usersList = []
+        const users = snapshot.val()
+            for (let id in users) {
+                _usersList.push({id, ...users[id]})
+            }
+          setUserList(_usersList)
+
+    }) )
+    },[])
 
 
   var displayName = '';
@@ -35,11 +51,21 @@ function App() {
 
         
       <Routes>
+      
       <Route path="/" element={<Home />} />
-        {<Route path="/create" element={<Create uid={uid} />} />}
+        <Route path="/create" element={<Create uid={uid} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/account" element={<Account />}/>
+          <Route path="/account" element={<Account />} />
+          {
+            usersList.map((user) => {
+              console.log(user.id)
+              const currentPath = '/garden/' + user.id;
+              console.log(currentPath);
+            <Route path={currentPath} element={<Garden user={ user }/>} />
+            })
+          }
+          
         </Routes>
         </UserProvider>
 
