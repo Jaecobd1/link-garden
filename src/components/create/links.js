@@ -67,6 +67,8 @@ function Links({ link }) {
         
     }, [])
 
+    
+
     return (
         <div className="bg-white w-9/12 flex items-center justify-around h-full flex-col rounded-xl shadow-xl mb-4 md:flex-row p-2 flex-wrap">
             <div className="flex items-center">

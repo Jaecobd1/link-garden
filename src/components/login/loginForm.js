@@ -13,6 +13,9 @@ export default function LoginForm() {
     const emailRef = useRef();
     const passwordRef = useRef();
 
+
+    
+
     const user = useContext(UserContext)
     function handleSignIn() {
         firebase.auth().signInWithEmailAndPassword(email, password)
@@ -20,6 +23,7 @@ export default function LoginForm() {
                 // setUser(userCredential.user);
                 emailRef.current.value = ""
                 passwordRef.current.value = ""
+                alert('Logged In')
                 
             })
             .catch((error) => {

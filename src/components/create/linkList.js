@@ -9,6 +9,9 @@ function LinkList() {
     const { user } = useContext(UserContext)
     const uid = user.uid
 
+
+    
+
     useEffect(() => {
         const linkRef = firebase.database().ref(uid);
         linkRef.on('value', (snapshot) => {

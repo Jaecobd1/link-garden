@@ -26,10 +26,18 @@ function Create() {
     const linkRef = firebase.database().ref(uid);
 
 
-    
+    // Validation of Https
+        // Removes https:// from users input
+    const httpsValidation = () => {
+        const regEx = /([https://])/g;
+        url = url.replace(regEx, "");
+    };
     
 
     const createLink = () => {
+        const regEx = '/(https:\/\/)/gy';
+        setUrl(url.replace(regEx, ""));
+        console.log(url)
         const link = {
             title,
             url
