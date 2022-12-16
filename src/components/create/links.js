@@ -19,15 +19,22 @@ function Links({ link }) {
         linkRef.update({
             title: title,
             url: url
+        }).then(() => {
+            console.log('Successful update')
+        }).catch((error) => {
+            console.log(error.message)
+            alert('Please enter both spaces')
         })
     }
 
     return (
-        <div className="bg-white w-9/12 flex items-center justify-around">
+        <div className="bg-white w-9/12 flex items-center justify-around h-full flex-col rounded-xl shadow-xl mb-4">
             <input onChange={((e) => { setTitle(e.target.value) })} placeholder={link.title} />
-            <input type="url" onChange={((e) => { setUrl(e.target.value) })} placeholder={ link.url}/>
-            <button onClick={updateItem}>Update</button>
-            <button onClick={deleteItem}>Delete</button>
+            <input type="url" onChange={((e) => { setUrl(e.target.value) })} placeholder={link.url} />
+            <button onClick={updateItem}
+            className="btn bg-blue text-white">Update</button>
+            <button onClick={deleteItem}
+            className="btn bg-white border-blue border-2 text-blue">Delete</button>
         </div>
     )
 }
