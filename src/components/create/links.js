@@ -28,7 +28,7 @@ function Links({ link }) {
     }
 
     return (
-        <div className="bg-white w-9/12 flex items-center justify-around h-full flex-col rounded-xl shadow-xl mb-4">
+        <div className="bg-white w-9/12 flex items-center justify-around h-full flex-col rounded-xl shadow-xl mb-4 md:flex-row">
             <input onChange={((e) => { setTitle(e.target.value) })} placeholder={link.title} />
             <input type="url" onChange={((e) => { setUrl(e.target.value) })} placeholder={link.url} />
             <button onClick={updateItem}

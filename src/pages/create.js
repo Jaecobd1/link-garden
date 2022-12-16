@@ -2,7 +2,6 @@ import React, {useContext, useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../utils/UserContext'
 import firebase from '../utils/firebase'
-
 import Links from '../components/create/links';
 import LinkList from '../components/create/linkList';
 
@@ -53,7 +52,7 @@ function Create() {
 
 
                 </div>
-                <div>
+                <div className="border-blue border-2 rounded-xl p-4 m-2 flex flex-col md:flex-row">
                     <input type="url" onChange={((e) => { setUrl(e.target.value) })} placeholder="URL" />
                     <input type="text" onChange={((e) => { setTitle(e.target.value) })} placeholder="Title" />
                     <button onClick={createLink}>Submit</button>
