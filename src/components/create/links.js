@@ -36,6 +36,7 @@ function Links({ link }) {
             alert('Please enter both spaces')
         })
     }
+
     // First Render change values to firebase values
     useEffect(() => {
         // console.log()
@@ -61,10 +62,6 @@ function Links({ link }) {
             <div className="flex items-center">
                 <label htmlFor="url">URL:</label>
             <input type="url" onChange={((e) => { setUrl(e.target.value) })} placeholder={link.url} className="url" ref={urlRef }/>
-            </div>
-            <div className="flex items-center">
-                <label htmlFor="title">Title:</label>
-                <input onChange={((e) => { setTitle(e.target.value) })} placeholder={link.title} ref={titleRef} className="title" />
             </div>
 
             <div className="flex">

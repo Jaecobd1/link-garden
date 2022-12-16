@@ -24,6 +24,12 @@
     input {
         @apply text-blue
     }
+    .input {
+        @apply bg-grey text-black
+    }
+    .input-placeholder {
+        @apply text-slate-500
+    }
 }
 
 body {

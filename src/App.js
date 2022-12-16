@@ -10,6 +10,7 @@ import Account from './pages/account'
 import UserProvider from './utils/UserContext'
 import Garden from './pages/garden'
 import {useEffect, useState} from 'react'
+import Profile from './pages/profile';
 
 
 function App() {
@@ -60,11 +61,13 @@ function App() {
           {
             usersList.map((user) => {
               console.log(user.id)
-              const currentPath = '/garden/' + user.id;
+              const currentPath = "/" + user.id;
               console.log(currentPath);
-            <Route path={currentPath} element={<Garden user={ user }/>} />
+              <Route path={currentPath} element={<Garden user={user} />} />
+             
             })
           }
+          <Route path="/profile" element={<Profile />} />
           
         </Routes>
         </UserProvider>

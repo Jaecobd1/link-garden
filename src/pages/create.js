@@ -59,7 +59,7 @@ function Create() {
                 </div>
                 <div className="border-blue border-2 rounded-xl p-4 m-2 flex flex-col md:flex-row bg-white">
                     <input type="url" onChange={((e) => { setUrl(e.target.value) })} placeholder="URL" />
-                    <input type="text" onChange={((e) => { setTitle(e.target.value) })} placeholder="Title" className="bg-grey placeholder:text-slate-500 text-black" />
+                    <input type="text" onChange={((e) => { setTitle(e.target.value) })} placeholder="Title" className="input placeholder:input-placeholder" />
                     <button onClick={createLink}>Submit</button>
                     
                 </div>
