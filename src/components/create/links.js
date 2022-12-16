@@ -64,7 +64,7 @@ function Links({ link }) {
             <input type="url" onChange={((e) => { setUrl(e.target.value) })} placeholder={link.url} className="url" ref={urlRef }/>
             </div>
 
-            <div className="flex">
+            <div className="flex w-1/2 justify-center">
                 <a href={ 'https://' + link.url } target="_blank">Test {link.title}</a>
             </div>
             
