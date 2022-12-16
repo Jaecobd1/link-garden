@@ -45,9 +45,9 @@ function Create() {
     return (
         <>
             <div className="min-h-screen h-full bg-grey flex flex-col items-center">
-             <div className="flex justify-between items-center h-[200px] px-5 w-screen">
+             <div className="flex justify-between items-center h-full  p-5 w-screen">
             
-            {user ? (<h1 className="text-2xl font-bold  underline text-blue">{user.displayName}'s Garden</h1>) : (
+            {user ? (<h1 className="text-2xl font-bold  text-blue">{user.displayName}'s Garden</h1>) : (
                 <h1>Please Login</h1>
             )}
                     <Link to="/profile">Edit profile</Link>
@@ -58,7 +58,7 @@ function Create() {
 
                 </div>
                 <div className="border-blue border-2 rounded-xl p-4 m-2 flex flex-col md:flex-row bg-white">
-                    <input type="url" onChange={((e) => { setUrl(e.target.value) })} placeholder="URL" />
+                    <input type="url" className="input placeholder:input-placeholder" onChange={((e) => { setUrl(e.target.value) })} placeholder="URL"  />
                     <input type="text" onChange={((e) => { setTitle(e.target.value) })} placeholder="Title" className="input placeholder:input-placeholder" />
                     <button onClick={createLink}>Submit</button>
                     

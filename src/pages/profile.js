@@ -1,6 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react'
 import firebase from '../utils/firebase'
-import {UserContext} from '../utils/UserContext'
+import { UserContext } from '../utils/UserContext'
+import { Link } from 'react-router-dom'
 
 function Profile() {
     const { user } = useContext(UserContext);
@@ -44,9 +45,10 @@ function Profile() {
     }
 
     return (
-        <div>
-            <div className="flex p-5">
+        <div className="font-montserrat">
+            <div className="flex p-5 justify-between items-center text-blue">
                 <h1 className="text-2xl">{username}'s Profile</h1>
+                <Link to='/create'>Edit Garden</Link>
             </div>
             <div className="flex flex-col items-start p-10">
                 {/* <div className="rounded-full bg-blue w-24 h-24 overflow-hidden m-5 relative">

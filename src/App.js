@@ -11,6 +11,8 @@ import UserProvider from './utils/UserContext'
 import Garden from './pages/garden'
 import {useEffect, useState} from 'react'
 import Profile from './pages/profile';
+import Examples from './pages/examples';
+import Footer from './components/footer/footer';
 
 
 function App() {
@@ -68,8 +70,10 @@ function App() {
             })
           }
           <Route path="/profile" element={<Profile />} />
+          <Route path="/examples" element={<Examples />}/>
           
         </Routes>
+        <Footer />
         </UserProvider>
 
 
