@@ -35,7 +35,7 @@ function Create() {
     
 
     const createLink = () => {
-        const regEx = '/(https:\/\/)/gy';
+        const regEx = '/(https://)/gy';
         setUrl(url.replace(regEx, ""));
         console.log(url)
         const link = {

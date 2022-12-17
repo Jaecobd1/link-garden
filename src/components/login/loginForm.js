@@ -19,7 +19,7 @@ export default function LoginForm() {
             .then((userCredential) => {
             user = userCredential.user
             console.log(user)
-            console.log("signed in")
+            alert("signed in")
         }).catch((error) => {
             console.log(error.message)
         })

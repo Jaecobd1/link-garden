@@ -35,7 +35,6 @@ function App() {
   var displayName = '';
   var uid = '';
 
-  console.log('links' , linksList)
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
