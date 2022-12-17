@@ -1,3 +1,4 @@
+import {useEffect, useState} from 'react'
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/home';
@@ -9,24 +10,23 @@ import firebase from './utils/firebase'
 import Account from './pages/account'
 import UserProvider from './utils/UserContext'
 import Garden from './pages/garden'
-import {useEffect, useState} from 'react'
 import Profile from './pages/profile';
 import Examples from './pages/examples';
 import Footer from './components/footer/footer';
 
 
 function App() {
-  const [usersList, setUserList] = useState([])
+  const [linksList, setLinkList] = useState([])
 
   useEffect(() => {
         const dbRef = firebase.database().refFromURL('https://link-garden-default-rtdb.firebaseio.com/')
     dbRef.on('value', (snapshot => {
-          const _usersList = []
-        const users = snapshot.val()
-            for (let id in users) {
-                _usersList.push({id, ...users[id]})
+          const _linkList = []
+        const links = snapshot.val()
+            for (let id in links) {
+                _linkList.push({id, ...links[id]}) 
             }
-          setUserList(_usersList)
+          setLinkList(_linkList)
 
     }) )
     },[])
@@ -34,6 +34,8 @@ function App() {
 
   var displayName = '';
   var uid = '';
+
+  console.log('links' , linksList)
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -56,16 +58,19 @@ function App() {
       <Routes>
       
       <Route path="/" element={<Home />} />
-        <Route path="/create" element={<Create uid={uid} />} />
+        <Route path="/create" element={<Create uid={linksList.id} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/account" element={<Account />} />
           {
-            usersList.map((user) => {
-              console.log(user.id)
-              const currentPath = "/" + user.id;
+            
+            linksList.map((links) => {
+              console.log(links.id)
+              const currentPath = "/garden/" + links.id;
               console.log(currentPath);
-              <Route path={currentPath} element={<Garden user={user} />} />
+              return (
+                <Route path={currentPath} element={<Garden links={links.id} key={ links.id}/>} />
+              )
              
             })
           }

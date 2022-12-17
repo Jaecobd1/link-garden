@@ -9,28 +9,19 @@ export default function LoginForm() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     
-    // Refs
-    const emailRef = useRef();
-    const passwordRef = useRef();
 
+    var {user} = useContext(UserContext)
 
-    
+    const handleSignIn = () => {
+        console.log(email, password)
 
-    const user = useContext(UserContext)
-    function handleSignIn() {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                // setUser(userCredential.user);
-                emailRef.current.value = ""
-                passwordRef.current.value = ""
-                alert('Logged In')
-                
-            })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log(errorCode)
-                alert(errorMessage)
+            user = userCredential.user
+            console.log(user)
+            console.log("signed in")
+        }).catch((error) => {
+            console.log(error.message)
         })
     }
     
@@ -41,15 +32,15 @@ export default function LoginForm() {
         <h1 className="text-white text-center text-4xl">Login</h1>
         <div className="flex flex-col text-white space-y-1">
         <label htmlFor="email" >Email:</label>
-                    <input type="text" placeholder="Email" className="email" onChange={((e) => { setEmail(e.target.value) })} ref={emailRef}/>
+        <input type="text" placeholder="Email" className="email" onChange={((e) => { setEmail(e.target.value) })} />
         <label htmlFor="password">Password:</label>
-                    <input type="password" placeholder="Password" className="password" onChange={((e) => { setPassword(e.target.value) })} ref={passwordRef}/>
+        <input type="password" placeholder="Password" className="password" onChange={((e) => { setPassword(e.target.value) })} />
         <Link to="/forgotPassword" className="text-white">Forgot Password?</Link>
-                    <button onClick={handleSignIn} className="btn-white btn "> Log In</button>
+        <button onClick={handleSignIn} className="btn-white btn "> Log In</button>
                     {/* {user && <h1> {user.displayName}</h1>} */}
-                </div>
-                
     </div>
+                
+</div>
         
 </>
     )

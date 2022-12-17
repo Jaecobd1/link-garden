@@ -9,19 +9,19 @@ import LinkList from '../components/create/linkList';
 function Create() {
     const { user } = useContext(UserContext)
     const uid = user.uid
-    useEffect(() => {
-        if (uid) {
-         console.log('User Logged in')
-        } else {
-            alert('Please log in')
-     } 
-    }, [])
+    // useEffect(() => {
+    //     if (uid) {
+    //      console.log('User Logged in' + uid)
+    //     } else {
+    //         alert('Please log in')
+    //  } 
+    // }, [])
 
     const [title, setTitle] = useState();
     const [url, setUrl] = useState();
     
 
-
+    
     
     const linkRef = firebase.database().ref(uid);
 
@@ -48,7 +48,7 @@ function Create() {
         )
 
     }
-
+    console.log(uid)
     const gardenLink = "/garden/" + uid;
     return (
         <>

@@ -6,9 +6,11 @@ import UserContext from '../../utils/UserContext';
 export default function NavBar() {
     //State Management
     
-    const user = firebase.auth().currentUser;
+    var user = null;
+
     useEffect(() => {
-        console.log( user )
+        console.log(user)
+        user = firebase.auth().currentUser;
     }, [])
      
 

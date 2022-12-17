@@ -82,7 +82,7 @@ function Links({ link }) {
             </div>
 
             <div className="flex w-1/2 justify-center">
-                <a href={ 'https://' + link.url } target="_blank">Test {link.title}</a>
+                <a href={ 'https://' + link.url } target="_blank" rel="noreferrer" >Test {link.title}</a>
             </div>
             
             <div className="flex">
