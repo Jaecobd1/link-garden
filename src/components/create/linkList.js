@@ -21,6 +21,7 @@ function LinkList() {
                 linkList.push({ id, ...links[id]})
             }
             setLinkList(linkList)
+            console.log(linkList)
         })
     }, [])
     return (
