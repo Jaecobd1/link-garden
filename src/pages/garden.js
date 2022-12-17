@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import firebase from '../utils/firebase'
 import { Link } from 'react-router-dom'
 
-function Garden(user) {
+function Garden({user}) {
     const [linkList, setLinkList] = useState();
 
-    const uid = user.user
+    const uid = user;
 
 
     var linkRef = firebase.database().ref(uid);
@@ -16,7 +16,8 @@ function Garden(user) {
             const links = snapshot.val();
             const linkList = [];
             for (let id in links) {
-                linkList.push({ id, ...links[id]})
+                linkList.push({ id, ...links[id] })
+                console.log(linkList)
             }
             setLinkList(linkList)
         })

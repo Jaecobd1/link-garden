@@ -5,19 +5,27 @@ import UserContext from '../../utils/UserContext';
 
 export default function NavBar() {
     //State Management
+    const [isUser, setIsUser] = useState(false);
     
     var user = null;
 
     useEffect(() => {
         console.log(user)
         user = firebase.auth().currentUser;
-    }, [])
+        if (user) {
+            setIsUser(true)
+        } else {
+            setIsUser(false)
+        }
+
+    }, [isUser])
      
 
 
     function handleSignOut() {
         firebase.auth().signOut().then(() => {
             alert('Please Create an Account or login')
+            setIsUser(false)
         }).catch((error) => {
             alert('Error Signing out... \n' + error.message )
         })
@@ -37,10 +45,10 @@ export default function NavBar() {
                     <Link to="/examples">Examples</Link>
                 </li>
                 <li>
-                    {user && <Link to="/create">Create a Garden</Link>}
+                    {isUser && <Link to="/create">Create a Garden</Link>}
                 </li>
                 <li>
-                   {!user? (<Link to="/login">Sign in</Link>):( <button onClick={handleSignOut} className="border-white border-2 rounded-xl p-1 hover:bg-white hover:border-blue hover:text-blue">Sign Out</button>)}
+                   {!isUser? (<Link to="/login">Sign in</Link>):( <button onClick={handleSignOut} className="border-white border-2 rounded-xl p-1 hover:bg-white hover:border-blue hover:text-blue">Sign Out</button>)}
                 </li>
             </ul>
         </nav>
