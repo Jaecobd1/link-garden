@@ -16,26 +16,11 @@ import Footer from './components/footer/footer';
 
 
 function App() {
-  const [linksList, setLinkList] = useState([])
+  const [userIDList, setUserIdList] = useState([])
 
-  useEffect(() => {
-        const dbRef = firebase.database().refFromURL('https://link-garden-default-rtdb.firebaseio.com/')
-    dbRef.on('value', (snapshot => {
-          const _linkList = []
-        const links = snapshot.val()
-            for (let id in links) {
-                _linkList.push({id, ...links[id]}) 
-            }
-          setLinkList(_linkList)
-
-    }) )
-    },[])
-
-
-  var displayName = '';
+// creating blank user
   var uid = '';
-
-
+// If firebase senses a change then user id is changed to the user ID
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       displayName = user.displayName
@@ -45,6 +30,28 @@ function App() {
 
     }
   })
+
+  // Pull from the database each value, create a list of the userIds, 
+  useEffect(() => {
+        
+       const dbRef = firebase.database().refFromURL('https://link-garden-default-rtdb.firebaseio.com/')
+    
+        dbRef.on('value', (snapshot => {
+          const _useridList = []
+        const users = snapshot.val()
+            for (let id in users) {
+                _useridList.push({id, ...users[id]}) 
+            }
+          setUserIdList(_useridList)
+          console.log(userIDList)
+
+    }) )
+    },[])
+
+
+  var displayName = '';
+
+  
 
 
 
@@ -57,18 +64,18 @@ function App() {
       <Routes>
       
       <Route path="/" element={<Home />} />
-        <Route path="/create" element={<Create uid={linksList.id} />} />
+        <Route path="/create" element={<Create  />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/account" element={<Account />} />
           {
             
-            linksList.map((links) => {
-              console.log(links.id)
-              const currentPath = "/garden/" + links.id;
+            userIDList.map((users) => {
+              console.log(users.id)
+              const currentPath = "/garden/" + users.id;
               console.log(currentPath);
               return (
-                <Route path={currentPath} element={<Garden links={links.id} key={ links.id}/>} />
+                <Route path={currentPath} element={<Garden user={users.id} key={ users.id }/>} />
               )
              
             })

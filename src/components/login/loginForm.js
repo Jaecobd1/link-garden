@@ -13,7 +13,6 @@ export default function LoginForm() {
     var {user} = useContext(UserContext)
 
     const handleSignIn = () => {
-        console.log(email, password)
 
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
