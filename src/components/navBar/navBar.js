@@ -6,20 +6,26 @@ import UserContext from '../../utils/UserContext';
 export default function NavBar() {
     //State Management
     const [isUser, setIsUser] = useState(false);
-    
+
     var user = null;
+
 
     useEffect(() => {
         console.log(user)
         user = firebase.auth().currentUser;
-        if (user) {
-            setIsUser(true)
-        } else {
-            setIsUser(false)
-        }
 
-    }, [isUser])
-     
+        firebase.auth().onAuthStateChanged((_user) => {
+            if (_user) {
+                setIsUser(true)
+            } else {
+                setIsUser(false)
+            }
+        })
+
+
+
+    }, [])
+
 
 
     function handleSignOut() {
@@ -27,7 +33,7 @@ export default function NavBar() {
             alert('Please Create an Account or login')
             setIsUser(false)
         }).catch((error) => {
-            alert('Error Signing out... \n' + error.message )
+            alert('Error Signing out... \n' + error.message)
         })
     }
 
@@ -38,7 +44,7 @@ export default function NavBar() {
             <div className="p-2">
                 <Link to="/" >
                     <h1>Link Garden</h1>
-                    </Link>
+                </Link>
             </div>
             <ul className="flex  justify-around p-5 space-x-2 flex-col text-center md:flex-row gap-2 items-center">
                 <li>
@@ -48,7 +54,7 @@ export default function NavBar() {
                     {isUser && <Link to="/create">Create a Garden</Link>}
                 </li>
                 <li>
-                   {!isUser? (<Link to="/login">Sign in</Link>):( <button onClick={handleSignOut} className="border-white border-2 rounded-xl p-1 hover:bg-white hover:border-blue hover:text-blue">Sign Out</button>)}
+                    {!isUser ? (<Link to="/login">Sign in</Link>) : (<button onClick={handleSignOut} className="border-white border-2 rounded-xl p-1 hover:bg-white hover:border-blue hover:text-blue">Sign Out</button>)}
                 </li>
             </ul>
         </nav>

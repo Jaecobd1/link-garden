@@ -17,15 +17,14 @@ export default firebase;
 
 
 firebase.auth().onAuthStateChanged((user) => {
-  
+
   if (user) {
     let uid = user.uid
     console.log(uid)
 
   } else {
-    alert('Signed out')
   }
-  
+
 
 })
 
